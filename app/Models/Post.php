@@ -15,4 +15,10 @@ class Post extends Model
 
     protected $hidden=[];
 
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
 }

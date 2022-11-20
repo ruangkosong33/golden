@@ -32,3 +32,11 @@ Route::get('/category{id}', [CategoryController::class, 'edit'])->name('category
 Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete ('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
+//Route Post
+Route::get('/posts', [PostController::class,'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/post/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
