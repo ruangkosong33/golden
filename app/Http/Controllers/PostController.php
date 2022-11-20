@@ -57,4 +57,11 @@ class PostController extends Controller
             'is_active'=>$request->is_active,
         ]);
     }
+
+    public function destroy($id)
+    {
+        $post=DB::table('posts')->where('id', $id)->delete();
+
+        return redirect('category.index')->with('message', 'Data Post Berhasil Di Hapus');
+    }
 }
