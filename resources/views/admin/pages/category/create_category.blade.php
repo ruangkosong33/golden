@@ -25,7 +25,12 @@
             <div class="form-group row">
               <label for="title_category" class="col-sm-2 col-form-label">Nama Kategori</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="title_category" placeholder="Judul Kategori" name="title_category">
+                <input type="text" class="form-control @error('title_category') is-invalid @enderror" id="title_category" placeholder="Judul Kategori" name="title_category">
+
+                @error('title_category')
+                    <span class="invalid-feedback">{{$message}}</span>
+                @enderror
+                
               </div>
             </div>
           </div>
