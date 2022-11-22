@@ -31,6 +31,7 @@ class PostController extends Controller
             'title_post'=>$request->title_category,
             'slug'=>Str::slug($request->title_category),
             'body'=>$request->body,
+            'picture_post'=>$request->picture_post,
             'is_active'=>$request->is_active,
         ]);
 

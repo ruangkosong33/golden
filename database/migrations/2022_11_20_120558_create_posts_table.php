@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('kategori_id');
             $table->text('body');
+            $table->string('picture_post');
             $table->boolean('is_active');
             $table->integer('views');
             $table->timestamps();
