@@ -58,6 +58,13 @@
             </div>
 
             <div class="form-group row">
+              <label for="category_id" class="col-sm2">
+                <select name="category_id" class="form-control">
+                  <option value={{$category_id->title_category}}>Kategori</option>
+                </select>
+            </div>
+
+            <div class="form-group row">
               <label for="is_active" class="col-sm-2">Status</label>
               <div class="col-sm-6">
                 <select name="title_post" class="form-control">
@@ -67,8 +74,13 @@
               </div>
             </div>
           </div>
-        </form>         
-    </section>
+
+          <div class="card-footer">
+            <button type="submit" class="btn btn-default">Simpan</button>
+            <a href={{route('posts.index')}} class="btn btn-danger" button type="submit">Kembali</a></button>
+        </form>
+      </div>
+      </section>
 </div>
 
 @endsection
