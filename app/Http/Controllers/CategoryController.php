@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category=DB::table('categories')->paginate('7');
+        $category=DB::table('categories')->orderBy('id')->paginate('7');
 
         return view('admin.pages.category.index_category', ['category'=>$category]);
     }

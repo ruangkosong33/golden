@@ -44,8 +44,10 @@
             <div class="form-group row">
               <label for="is_active" class="col-sm-2">Status</label>
               <div class="col-sm-6">
-                <select name="is_active" class="form-control">
-                  <option value="{{}}">{{}}</option>
+                <select name="title_post" class="form-control">
+                  <option value="1"{{$post->is_active == '1' ? 'selected' : ''}}>Publish</option>
+                  <option value="0"{{$post->is_active == '0' ? 'selected' : ''}}>Draft</option>
+                </select>
               </div>
             </div>
           </div>
