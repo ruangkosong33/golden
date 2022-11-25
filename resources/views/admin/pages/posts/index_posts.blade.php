@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Kategori</h1>
+            <h1 class="m-0">Post</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -31,28 +31,32 @@
 
           <!-- /.card-header -->
           <div class="card-body py-0">
-            <table class="card-body py-0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Judul Post</th>
-                        <th>Isi Post</th>
-                        <th>Kategori</th>
-                        <th>Gambar Post</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                  <tbody>
-                    @foreach ($post as $posts)
-                      <tr>
-                        <td>{{$posts->title_post}}</td>
-                        <td>{{$posts->slug}}</td>
-                        <td>{{$posts->$category_id->title_category}}</td>
-                        <td>{{$posts->picture_post}}</td>
-                      </tr>
-                    @endforeach
-                  </tbody>
+            <table class="table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Judul Post</th>
+                  <th>Slug</th>
+                  <th>Deksripsi</th>
+                  <th>Kategori</th>
+                  <th>Gambar Post</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              <tbody>
+                @foreach ($post as $posts)
+                  <tr>
+                    <td>{{$posts->title_post}}</td>
+                    <td>{{$posts->slug}}</td>
+                    <td>{{$posts->body}}</td>
+                    <td>{{$posts->category_id->title_category}}</td>
+                    <td>{{$posts->picture_post}}</td>
+                    <td>{{$posts->status}}</td>
+                  </tr>
+                @endforeach
+              </tbody>
             </table>
+          </div>
           <div class="card-footer clearfix">
             
             Showing
@@ -64,7 +68,7 @@
             entries
 
             <div class="pagination pagination-sm m-0 float-right">
-              {{ $category->links() }}   
+              {{ $post->links() }}   
             </div>
           </div>
         </div>       

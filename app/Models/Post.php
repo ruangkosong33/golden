@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $table='posts';
 
-    protected $fillable=['title_post', 'slug', 'kategori_id', 'body', 'is_active', 'views' ];
+    protected $fillable=['title_post', 'slug', 'kategori_id', 'body', 'picture_post', 'is_active', 'views' ];
 
     protected $hidden=[];
 

@@ -23,24 +23,40 @@
         </div> 
         <!-- /.card-header -->
         <!-- form start -->
-        <form action={{route('category.index')}} method="post" class="form-horizontal">
+        <form action={{route('category.index')}} method="post" class="form-horizontal" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group row">
-              <label for="title_category" class="col-sm-2">Judul Post</label>
+              <label for="title_post" class="col-sm-2">Judul Post</label>
               <div class="col-sm-6">
-                <input type="text" name="title_post" id="title_post" placeholder="Judul Post" class="form-control">
-            <div class="form-group row">
-              <label for="kategori" class="col-sm-2">Kategori</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-contorl" name="kategori" placeholder="Judul Post">
+                <input type="text" name="title_post" id="title_post" class="form-control @error('title_post') is-invalid @enderror" placeholder="Judul Post">
+                
+                @error('title_post')
+                <span class="invalid-feedback">{{$meesage}}</span>
+                @enderror
+                  
               </div>
             </div>
+
             <div class="form-group row">
-              <label for="body" class="col-sm-2">Body</label>
+              <label for="body" class="col-sm-2">Deskripsi</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control" name="body" id="body" placeholder="Isi Post">
+                <input type="text" class=form-control @error('body') is-invalid @enderror name="body" placeholder="Deskripsi" id="body">
+                
+                @error
+                <span class="invalid-feedback">{{$message}}</span>
+                @enderror
+
               </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="picture_post" class="col-sm-2">Gambar Post</label>
+              <div class="col-sm-6">
+                <input type="file" class="form-control" id="picture_post" placeholder="picture_post" name="picture_post">
+              </div>
+            </div>
+
             <div class="form-group row">
               <label for="is_active" class="col-sm-2">Status</label>
               <div class="col-sm-6">

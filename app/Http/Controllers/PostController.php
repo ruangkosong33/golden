@@ -47,6 +47,15 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        if(empty($request->file('picture_post')))
+        {
+           $picture_post=$request->file('picture_post');
+           $picture_post1=$request->$picture_post->getClientOriginalName();
+           $picture_post2=$request->picture_post->getClientOriginalExtenstion();
+           $path=$request->file('picture_post')->storeAs('public/post-image', $picture_post2);     
+        }else {
+            $picture_post='no_image';
+        }
         $this->validate($request,[
             'title_post'=>'required',
         ]);
@@ -55,8 +64,11 @@ class PostController extends Controller
             'title_post'=>$request->title_post,
             'slug'=>Str::slug($request->title_post),
             'body'=>$request->body,
+            'picture_post'=>$request->picture_post,
             'is_active'=>$request->is_active,
         ]);
+
+        return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
     }
 
     public function destroy($id)
