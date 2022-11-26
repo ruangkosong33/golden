@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -11,8 +12,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post=DB::table('posts')->orderBy('id')->paginate('7');
-
+        $post=DB::table('posts')
+                            ->join('categorys', 'posts.categorys_id', '=' ,'categorys.id')
+                            ->select('posts*', 'categorys.title_category')
+                            ->get();
+    
         return view('admin.pages.posts.index_posts', ['post'=>$post]);
     }
 

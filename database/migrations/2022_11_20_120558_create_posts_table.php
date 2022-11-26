@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title_post');
             $table->string('slug');
-            $table->integer('kategori_id');
             $table->text('body');
+            $table->integer('categorys_id');
             $table->string('picture_post');
             $table->boolean('is_active');
             $table->integer('views');

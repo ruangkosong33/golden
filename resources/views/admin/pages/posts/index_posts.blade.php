@@ -31,7 +31,7 @@
 
           <!-- /.card-header -->
           <div class="card-body py-0">
-            <table class="table-striped table-bordered">
+            <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>No</th>
@@ -44,14 +44,15 @@
                   <th>Action</th>
                 </tr>
               <tbody>
-                @foreach ($post as $posts)
+                @foreach ($post as $key=>$posts)
                   <tr>
+                    <td>{{$post->firstItem() + $key}}</td>
                     <td>{{$posts->title_post}}</td>
                     <td>{{$posts->slug}}</td>
                     <td>{{$posts->body}}</td>
-                    <td>{{$posts->category_id->title_category}}</td>
+                    <td>{{$posts->categorys_id->title_category}}</td>
                     <td>{{$posts->picture_post}}</td>
-                    <td>{{$posts->status}}</td>
+                    <td>{{$posts->is_active}}</td>
                   </tr>
                 @endforeach
               </tbody>

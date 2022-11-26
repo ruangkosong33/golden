@@ -11,14 +11,14 @@ class Post extends Model
 
     protected $table='posts';
 
-    protected $fillable=['title_post', 'slug', 'kategori_id', 'body', 'picture_post', 'is_active', 'views' ];
+    protected $fillable=['title_post', 'slug', 'categorys_id', 'body', 'picture_post', 'is_active', 'views' ];
 
     protected $hidden=[];
 
 
-    public function kategori()
+    public function category()
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(Category::class , 'categorys_id', 'id');
     }
 
 }
