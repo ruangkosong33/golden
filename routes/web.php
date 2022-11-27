@@ -40,3 +40,10 @@ Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edi
 Route::put('/post/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+//Route Video 
+Route::get('/video', [VideoController::class, 'index'])->name('video.index');
+Route::get('/video/create', [VideoController::class, 'create'])->name('video.create');
+Route::post('/video', [VideoController::class, 'store'])->name('video.store');
+Route::get('/video/edit/{id}', [VideoController::class, 'edit'])->name('video.edit');
+Route::put('/video/{id}', [VideoController::class, 'update'])->name('video.update');
+Route::delete('/video/{id}', [VideoController::class, 'destroy'])->name('video.destroy');

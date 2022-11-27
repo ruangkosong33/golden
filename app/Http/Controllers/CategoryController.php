@@ -12,9 +12,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category=DB::table('categorys')->orderBy('id')->paginate('7');
+        $category=Category::orderBy('id', 'desc')->paginate('5');
+        //$category=DB::table('categorys')->orderBy('id')->paginate('7');
 
-        
         return view('admin.pages.category.index_category', ['category'=>$category]);
     }
 
@@ -29,7 +29,8 @@ class CategoryController extends Controller
             'title_category'=>'required|min:4',
         ]);
 
-        DB::table('categorys')->insert([
+        //DB::table('categorys')->insert([
+        $category=Category::create([
             'title_category'=>$request->title_category,
             'slug'=>Str::slug($request->title_category),
         ]);
@@ -39,7 +40,8 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $category=DB::table('categorys')->where('id', $id)->first();
+        //$category=DB::table('categorys')->where('id', $id)->first();
+        $category=Category::findOrFail($id);
 
         return view('admin.pages.category.edit_category', ['category'=>$category]);
     }
@@ -49,8 +51,10 @@ class CategoryController extends Controller
         $this->validate($request,[
             'title_category'=>'required',
         ]);
+        //DB::table('categorys')->where('id',$request->id)->update([
+        $category=Category::find($id);
 
-        DB::table('categorys')->where('id',$request->id)->update([
+        $category->update([
             'title_category'=>$request->title_category,
             'slug'=>Str::slug($request->title_category),
         ]);
@@ -60,7 +64,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category=DB::table('categorys')->where('id', $id)->delete();
+        //$category=DB::table('categorys')->where('id', $id)->delete();
+        $category=Category::findOrFail($id);
+        $category->delete();
 
         return redirect()->route('category.index')->with('message', 'Data Kategoi Berhasil Di Hapus');
     }

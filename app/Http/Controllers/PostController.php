@@ -12,10 +12,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post=DB::table('posts')
-                            ->join('categorys', 'posts.categorys_id', '=' ,'categorys.id')
-                            ->select('posts*', 'categorys.title_category')
-                            ->get();
+        // $post=DB::table('posts')
+        //                     ->join('categorys', 'posts.categorys_id', '=','categorys.id')
+        //                     ->select('posts.*', 'categorys.title_category')
+        //                     ->paginate('5');
     
         return view('admin.pages.posts.index_posts', ['post'=>$post]);
     }
@@ -32,8 +32,8 @@ class PostController extends Controller
         ]);
 
         DB::table('post')->insert([
-            'title_post'=>$request->title_category,
-            'slug'=>Str::slug($request->title_category),
+            'title_post'=>$request->title_post,
+            'slug'=>Str::slug($request->title_post),
             'body'=>$request->body,
             'picture_post'=>$request->picture_post,
             'is_active'=>$request->is_active,
