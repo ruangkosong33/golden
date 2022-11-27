@@ -50,7 +50,7 @@
                     <td>{{$posts->title_post}}</td>
                     <td>{{$posts->slug}}</td>
                     <td>{{$posts->body}}</td>
-                    <td>{{$posts->title_category}}</td>
+                    <td>{{$posts->category->title_category}}</td>
                     <td>{{$posts->picture_post}}</td>
                     <td>{{$posts->is_active}}</td>
                   </tr>

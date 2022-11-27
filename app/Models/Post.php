@@ -16,7 +16,7 @@ class Post extends Model
     protected $hidden=[];
 
     
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class, 'categorys_id', 'id');
     }

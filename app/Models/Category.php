@@ -14,4 +14,9 @@ class Category extends Model
     protected $fillable=['title_category', 'slug'];
 
     protected $hidden=[];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'posts_id', 'id');
+    }
 }
