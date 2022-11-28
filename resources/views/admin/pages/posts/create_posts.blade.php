@@ -58,13 +58,17 @@
             </div>
 
             <div class="form-group row">
-              <label for="categorys_id" class="col-sm2">
+              <label for="categorys_id" class="col-sm-2">Kategori</label>
+              <div class="col-sm-6">
                 <select name="categorys_id" class="form-control">
-                  <option value={{$categorys_id}}>/option>
-                </select>
+                  @foreach ($category as $categorys)
+                  <option value={{$categorys->id}}>{{$categorys->title_category}}</option>
+                  @endforeach
+                </select>     
+              </div>
             </div>
 
-            <div class="form-group row">
+            {{-- <div class="form-group row">
               <label for="is_active" class="col-sm-2">Status</label>
               <div class="col-sm-6">
                 <select name="title_post" class="form-control">
@@ -72,7 +76,7 @@
                   <option value="0"{{$posts->is_active == '0' ? 'selected' : ''}}>Draft</option>
                 </select>
               </div>
-            </div>
+            </div> --}}
           </div>
 
           <div class="card-footer">

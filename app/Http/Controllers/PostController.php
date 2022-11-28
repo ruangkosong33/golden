@@ -24,7 +24,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.pages.posts.create_posts');
+        $category=Category::all();
+        return view('admin.pages.posts.create_posts', ['category'=>$category]);
     }
 
     public function store(Request $request)
