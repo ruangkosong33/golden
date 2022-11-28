@@ -41,9 +41,9 @@
             <div class="form-group row">
               <label for="body" class="col-sm-2">Deskripsi</label>
               <div class="col-sm-6">
-                <input type="text" class=form-control @error('body') is-invalid @enderror name="body" placeholder="Deskripsi" id="body">
+                <input type="text" class="form-control @error('body') is-invalid @enderror" name="body" placeholder="Deskripsi" id="body">
                 
-                @error
+                @error('body')
                 <span class="invalid-feedback">{{$message}}</span>
                 @enderror
 
@@ -58,9 +58,9 @@
             </div>
 
             <div class="form-group row">
-              <label for="category_id" class="col-sm2">
-                <select name="category_id" class="form-control">
-                  <option value={{$category_id->title_category}}>Kategori</option>
+              <label for="categorys_id" class="col-sm2">
+                <select name="categorys_id" class="form-control">
+                  <option value={{$categorys_id}}>/option>
                 </select>
             </div>
 
@@ -68,8 +68,8 @@
               <label for="is_active" class="col-sm-2">Status</label>
               <div class="col-sm-6">
                 <select name="title_post" class="form-control">
-                  <option value="1"{{$post->is_active == '1' ? 'selected' : ''}}>Publish</option>
-                  <option value="0"{{$post->is_active == '0' ? 'selected' : ''}}>Draft</option>
+                  <option value="1"{{$posts->is_active == '1' ? 'selected' : ''}}>Publish</option>
+                  <option value="0"{{$posts->is_active == '0' ? 'selected' : ''}}>Draft</option>
                 </select>
               </div>
             </div>

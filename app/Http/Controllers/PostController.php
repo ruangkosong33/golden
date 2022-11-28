@@ -22,65 +22,65 @@ class PostController extends Controller
         return view('admin.pages.posts.index_posts', ['post'=>$post]);
     }
 
-//     public function create()
-//     {
-//         return view('admin.pages.posts.create_posts');
-//     }
+    public function create()
+    {
+        return view('admin.pages.posts.create_posts');
+    }
 
-//     public function store(Request $request)
-//     {
-//         $this->validate($request,[
-//             'title_post'=>'required',
-//         ]);
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'title_post'=>'required',
+        ]);
 
-//         DB::table('post')->insert([
-//             'title_post'=>$request->title_post,
-//             'slug'=>Str::slug($request->title_post),
-//             'body'=>$request->body,
-//             'picture_post'=>$request->picture_post,
-//             'is_active'=>$request->is_active,
-//         ]);
+        $picture_file=$request->file('picture_post');
+        $picture_original=$picture_file->getClientOriginalName();
+        $picture_extension=$picture_file->getClientOriginalExtension();
+        $picture_file->move('images_post', $picture_file->getOriginalClientName());
 
-//         return redirect()->route('posts.index')->with('message', 'Data Post Berhasl Di Tambahkan');
-//     }
+        $post=Post::create([
+            'title_post'=>$request->title_post,
+            'slug'=>Str::slug($request->title_post),
+            'categorys_id'=>$request->categorys_id,
+            'picture_post'=>$picture_file,
+            'is_active'=>$request->is_active,
+        ]);
 
-//     public function edit($id)
-//     {
-//         $post=DB::table('posts')->where('id', $id)->first();
+        return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Tambahkan');
+    }
 
-//         return view('admin.pages.edit_posts', ['post'=>$post]);
-//     }
+    public function edit($id)
+    {
+        $post=Post::findOrFail($id);
 
-//     public function update(Request $request, $id)
-//     {
-//         if(empty($request->file('picture_post')))
-//         {
-//            $picture_post=$request->file('picture_post');
-//            $picture_post1=$request->$picture_post->getClientOriginalName();
-//            $picture_post2=$request->picture_post->getClientOriginalExtenstion();
-//            $path=$request->file('picture_post')->storeAs('public/post-image', $picture_post2);     
-//         }else {
-//             $picture_post='no_image';
-//         }
-//         $this->validate($request,[
-//             'title_post'=>'required',
-//         ]);
+        return view('admin.pages.posts.edit_posts', ['post'=>$post]);
+    }
 
-//         DB::table('post')->where('id', $request->id)->update([
-//             'title_post'=>$request->title_post,
-//             'slug'=>Str::slug($request->title_post),
-//             'body'=>$request->body,
-//             'picture_post'=>$request->picture_post,
-//             'is_active'=>$request->is_active,
-//         ]);
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'title_post'=>'required',
+        ]);
 
-//         return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
-//     }
+        $post=Post::findOrFail($id);
 
-//     public function destroy($id)
-//     {
-//         $post=DB::table('posts')->where('id', $id)->delete();
+        $post->update([
+            'title_post'=>$request->title_post,
+            'slug'=>Str::slug($request->title_post),
+            'categorys_id'=>$request->categorys_id,
+            'picture_post'=>$picture_file,
+            'is_active'=>$request->is_active,    
+        ]);
 
-//         return redirect('category.index')->with('message', 'Data Post Berhasil Di Hapus');
-//     }
+        return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
+    }
+
+    public function destroy($id)
+    {
+        //$category=DB::table('categorys')->where('id', $id)->delete();
+        $post=Post::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('posts.index')->with('message', 'Data Posts Berhasil Di Hapus');
+    }
 }

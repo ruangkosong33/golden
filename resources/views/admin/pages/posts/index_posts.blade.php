@@ -46,7 +46,7 @@
               <tbody>
                 @foreach ($post as $key=>$posts)
                   <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <td>{{$post->firstItem() + $key}}</td>
                     <td>{{$posts->title_post}}</td>
                     <td>{{$posts->slug}}</td>
                     <td>{{$posts->body}}</td>
@@ -60,10 +60,16 @@
           </div>
           <div class="card-footer clearfix">
             
-           
+            Showing
+            {{$post->firstItem()}}
+            to
+            {{$post->lastItem()}}
+            of
+            {{$post->total()}}
+            entries
 
             <div class="pagination pagination-sm m-0 float-right">
-           
+              {{ $post->links() }}  
             </div>
           </div>
         </div>       
