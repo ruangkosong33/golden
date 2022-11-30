@@ -32,19 +32,22 @@ class PostController extends Controller
     {
         $this->validate($request,[
             'title_post'=>'required',
+            'picture_post'=>'mimes:jpg,jpeg,png',
         ]);
 
         $picture_file=$request->file('picture_post');
         $picture_original=$picture_file->getClientOriginalName();
-        $picture_extension=$picture_file->getClientOriginalExtension();
-        $picture_file->move('images_post', $picture_file->getOriginalClientName());
+        //$picture_extension=$picture_file->getClientOriginalExtension();
+        $picture_file->move('images_post', $picture_file->getClientOriginalName());
 
         $post=Post::create([
             'title_post'=>$request->title_post,
             'slug'=>Str::slug($request->title_post),
+            'body'=>$request->body,
             'categorys_id'=>$request->categorys_id,
             'picture_post'=>$picture_file,
             'is_active'=>$request->is_active,
+            'views'=> 0,
         ]);
 
         return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Tambahkan');
@@ -61,7 +64,13 @@ class PostController extends Controller
     {
         $this->validate($request,[
             'title_post'=>'required',
+            'picture_post'=>'mimes:jpg,jpeg,png',
         ]);
+
+        if(!empty($request->file('picture_post')))
+        {
+            
+        }
 
         $post=Post::findOrFail($id);
 
