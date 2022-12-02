@@ -37,7 +37,7 @@ class PostController extends Controller
 
         $picture_file=$request->file('picture_post');
         $picture_original=$picture_file->getClientOriginalName();
-        //$picture_extension=$picture_file->getClientOriginalExtension();
+        $picture_extension=$picture_file->getClientOriginalExtension();
         $picture_file->move('images_post', $picture_file->getClientOriginalName());
 
         $post=Post::create([
@@ -56,8 +56,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post=Post::findOrFail($id);
+        $category=Category::all();
 
-        return view('admin.pages.posts.edit_posts', ['post'=>$post]);
+        return view('admin.pages.posts.edit_posts', ['post'=>$post, 'category'=>$category]);
     }
 
     public function update(Request $request, $id)
@@ -67,22 +68,25 @@ class PostController extends Controller
             'picture_post'=>'mimes:jpg,jpeg,png',
         ]);
 
-        if(!empty($request->file('picture_post')))
+        if(empty($request->file('picture_post')))
         {
+            $picture_file=$request->file('picture_post');
+            $picture_original=$picture_file->getClientOriginalName();
+            $picture_extension=$picture_file->getClientOriginalExtension();
+            $picture_file->move('images_post', $picture_file->getClientOriginalName());
             
+            $post=Post::findOrFail($id);
+
+            $post->update([
+                'title_post'=>$request->title_post,
+                'slug'=>Str::slug($request->title_post),
+                'categorys_id'=>$request->categorys_id,
+                'picture_post'=>$picture_file,
+                'is_active'=>$request->is_active,    
+            ]);
         }
-
-        $post=Post::findOrFail($id);
-
-        $post->update([
-            'title_post'=>$request->title_post,
-            'slug'=>Str::slug($request->title_post),
-            'categorys_id'=>$request->categorys_id,
-            'picture_post'=>$picture_file,
-            'is_active'=>$request->is_active,    
-        ]);
-
         return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
+        
     }
 
     public function destroy($id)

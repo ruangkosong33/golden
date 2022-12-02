@@ -53,6 +53,21 @@
                     <td>{{$posts->category->title_category}}</td>
                     <td>{{$posts->picture_post}}</td>
                     <td>{{$posts->is_active}}</td>
+                    <td>
+                      <a href="{{route ('posts.edit', $posts->id)}}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                      <form method="post" action="{{route ('posts.destroy', $posts->id)}}" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                      <button class="btn btn-sm btn-danger btn-delete">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      </form>
+                      <a href="" class="btn btn-info btn-sm">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                  </td>
                   </tr>
                 @endforeach
               </tbody>

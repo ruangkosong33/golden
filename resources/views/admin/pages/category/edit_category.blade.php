@@ -30,7 +30,8 @@
             <div class="form-group row">
               <label for="title_category" class="col-sm-2 col-form-label">Nama Kategori</label>
               <div class="col-sm-6">
-                <input type="text" name="title_category" value="{{old('title_category') ?? $category->title_category}}" class="form-control @error('title_category') is-invalid @enderror" id="title_category" placeholder="Judul Kategori">
+                <input type="text" name="title_category" value="{{old('title_category') ?? $category->title_category}}" 
+                class="form-control @error('title_category') is-invalid @enderror" id="title_category" placeholder="Judul Kategori">
                 
                 @error('title_category')
                     <span class="invalid-feedback">{{$message}}</span>

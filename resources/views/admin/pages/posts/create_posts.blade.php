@@ -23,7 +23,7 @@
         </div> 
         <!-- /.card-header -->
         <!-- form start -->
-        <form action={{route('posts.index')}} method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form action="{{route('posts.index')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group row">
