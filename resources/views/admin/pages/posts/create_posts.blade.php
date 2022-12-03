@@ -39,9 +39,9 @@
             </div>
 
             <div class="form-group row">
-              <label for="body" class="col-sm-2">Deskripsi</label>
+              <label for="editor" class="col-sm-2">Deskripsi</label>
               <div class="col-sm-6">
-                <input type="text" class="form-control @error('body') is-invalid @enderror" name="body" placeholder="Deskripsi" id="body">
+                <input type="text" class="form-control @error('body') is-invalid @enderror" name="body" placeholder="Deskripsi" id="editor">
                 
                 @error('body')
                 <span class="invalid-feedback">{{$message}}</span>
@@ -97,5 +97,16 @@
       </div>
       </section>
 </div>
+
+@section('ckeditor')
+  <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor
+          .create( document.querySelector( '#editor' ) )
+          .catch( error => {
+              console.error( error );
+          } );
+    </script>
+@endsection
 
 @endsection

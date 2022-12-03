@@ -52,5 +52,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- jQuery -->
   @include('admin.layouts.b_js')
 <!-- End jQuery -->
+
+<!-- ckeditor -->
+@yield('ckeditor')
+<!-- End ckeditor -->
 </body>
 </html>

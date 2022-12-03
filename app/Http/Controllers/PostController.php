@@ -37,19 +37,24 @@ class PostController extends Controller
         ]);
 
 
-        if($request->file('picture_post')){
-            $extension=$request->file('picture_post')->getClientOriginalExtension();
-            $extensionn=$request->file('picture_post')->getClientOriginalName();
-            $request->file('picture_post')->storeAs('img', $extensionn);
+        // if($request->file('picture_post')){
+        //     $extension=$request->file('picture_post')->getClientOriginalExtension();
+        //     $extensionn=$request->file('picture_post')->getClientOriginalName();
+        //     $request->file('picture_post')->storeAs('img', $extensionn);
         
-        }
+        // }
+
+        $picture_file=$request->file('picture_post');
+        $picture_original=$picture_file->getClientOriginalName();
+        $picture_extension=$picture_file->getClientOriginalExtension();
+        $request->file('picture_post')->storeAs('img', $picture_original);
            
         $post=Post::create([
             'title_post'=>$request->title_post,
             'slug'=>Str::slug($request->title_post),
             'body'=>$request->body,
             'categorys_id'=>$request->categorys_id,
-            'picture_post'=>$extensionn,
+            'picture_post'=>$picture_original,
             'is_active'=>$request->is_active,
             'views'=> 0,
         ]);
