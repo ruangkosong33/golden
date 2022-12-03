@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -32,20 +33,23 @@ class PostController extends Controller
     {
         $this->validate($request,[
             'title_post'=>'required',
-            'picture_post'=>'mimes:jpg,jpeg,png',
+            'picture_post'=>'required|image|mimes:jpg,jpeg,png',
         ]);
 
-        $picture_file=$request->file('picture_post');
-        $picture_original=$picture_file->getClientOriginalName();
-        $picture_extension=$picture_file->getClientOriginalExtension();
-        $picture_file->move('images_post', $picture_file->getClientOriginalName());
 
+        if($request->file('picture_post')){
+            $extension=$request->file('picture_post')->getClientOriginalExtension();
+            $extensionn=$request->file('picture_post')->getClientOriginalName();
+            $request->file('picture_post')->storeAs('img', $extensionn);
+        
+        }
+           
         $post=Post::create([
             'title_post'=>$request->title_post,
             'slug'=>Str::slug($request->title_post),
             'body'=>$request->body,
             'categorys_id'=>$request->categorys_id,
-            'picture_post'=>$picture_file,
+            'picture_post'=>$extensionn,
             'is_active'=>$request->is_active,
             'views'=> 0,
         ]);
@@ -68,12 +72,10 @@ class PostController extends Controller
             'picture_post'=>'mimes:jpg,jpeg,png',
         ]);
 
-        if(empty($request->file('picture_post')))
-        {
             $picture_file=$request->file('picture_post');
             $picture_original=$picture_file->getClientOriginalName();
             $picture_extension=$picture_file->getClientOriginalExtension();
-            $picture_file->move('images_post', $picture_file->getClientOriginalName());
+            $picture_file->storeAs('images_post/', $picture_file->getClientOriginalName());
             
             $post=Post::findOrFail($id);
 
@@ -84,9 +86,7 @@ class PostController extends Controller
                 'picture_post'=>$picture_file,
                 'is_active'=>$request->is_active,    
             ]);
-        }
-        return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
-        
+            return redirect()->route('posts.index')->with('message', 'Data Post Berhasil Di Update');
     }
 
     public function destroy($id)

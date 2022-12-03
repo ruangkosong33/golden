@@ -55,8 +55,10 @@
             <div class="form-group row">
               <label for="picture_post" class="col-sm-2">Gambar Post</label>
               <div class="col-sm-6">
-                <input type="file" class="form-control @error('picture_post') is-invalid @enderror" id="picture_post" placeholder="picture_post" name="picture_post">
-
+                <input type="file" class="form-control @error('picture_post') is-invalid @enderror" id="picture_post" placeholder="picture_post" name="picture_post" 
+                value="{{old('picture_post') ?? $post->picture_post}}">
+                <br>
+                <img src="{{asset('images_post/'). $post->picture_post}}">
                 @error('picture_post')
                 <span class="invalid-feedback">{{$message}}</span>
                 @enderror

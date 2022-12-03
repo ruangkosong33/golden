@@ -51,7 +51,7 @@
                     <td>{{$posts->slug}}</td>
                     <td>{{$posts->body}}</td>
                     <td>{{$posts->category->title_category}}</td>
-                    <td>{{$posts->picture_post}}</td>
+                    <td><img src="{{asset('img/'. $posts->picture_post)}}"></td>
                     <td>{{$posts->is_active}}</td>
                     <td>
                       <a href="{{route ('posts.edit', $posts->id)}}" class="btn btn-warning btn-sm">
