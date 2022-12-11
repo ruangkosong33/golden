@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
@@ -17,9 +18,15 @@ use App\Http\Controllers\VideoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+//Route Login
+Route::get('/', [AuthController::class, 'login'])->name('route.login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 
 //Route Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

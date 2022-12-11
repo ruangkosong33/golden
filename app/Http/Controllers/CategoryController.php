@@ -29,6 +29,7 @@ class CategoryController extends Controller
             'title_category'=>'required|min:4',
         ]);
 
+        $request['password']=Hash::make($request->password);
         //DB::table('categorys')->insert([
         $category=Category::create([
             'title_category'=>$request->title_category,
